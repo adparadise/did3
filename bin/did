@@ -1,32 +1,13 @@
 #!/usr/bin/env python
 # -*- mode: python -*-
 
-import os
-import sys
 import inspect
 
-def get_project_home():
-    """Find the absolute path to this project so we can import files
-    from it.
-    """
-    current_frame = inspect.currentframe()
-    relative_filename = inspect.getfile(current_frame)
-    absolute_filename = os.path.abspath(relative_filename)
-    bin_home = os.path.dirname(absolute_filename)
-    project_home = os.path.join(bin_home, '..')
-    project_home = os.path.realpath(project_home)
-
-    return project_home
-
-def include_project_home():
-    """Include this project in the import search paths.
-    """
-    project_home = get_project_home()
-    sys.path.insert(0, project_home)
-
+from path import PathManager
 
 if __name__ == '__main__':
-    include_project_home()
+    path_manager = PathManager(inspect.currentframe())
+    path_manager.include_project_home()
 
     from did import Home
 
