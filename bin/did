@@ -2,6 +2,7 @@
 # -*- mode: python -*-
 
 import inspect
+import os
 
 from path import PathManager
 
@@ -11,3 +12,4 @@ if __name__ == '__main__':
 
     from did import Home
 
+    home = Home(os.environ)

@@ -1,8 +1,19 @@
 
-# A class to represent our home data directory, whether it exists or
-# not
 
 import os
 
 class Home(object):
-    pass
+    """A class to represent our home data directory, whether it exists or
+    not.
+    """
+    ENVIRONMENT_KEY = 'DID_HOME'
+
+    def __init__(self, environ):
+        self.home_path = self.resolve_home_path(environ)
+
+    def resolve_home_path(self, environ):
+        home_path = '~/.did'
+        if Home.ENVIRONMENT_KEY in environ:
+            home_path = environ[Home.ENVIRONMENT_KEY]
+
+        return home_path
