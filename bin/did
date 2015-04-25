@@ -3,6 +3,7 @@
 
 import inspect
 import os
+import sys
 
 from path import PathManager
 
@@ -10,6 +11,14 @@ if __name__ == '__main__':
     path_manager = PathManager(inspect.currentframe())
     path_manager.include_project_home()
 
+    from did import Command
     from did import Home
+    from did import Controller
+
+    command = Command()
+    command.consume_argv(sys.argv)
 
     home = Home(os.environ)
+
+    controller = Controller(sys.stdout, sys.stderr)
+    controller.perform_command(command, home)

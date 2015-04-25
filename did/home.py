@@ -9,7 +9,7 @@ class Home(object):
     ENVIRONMENT_KEY = 'DID_HOME'
 
     def __init__(self, environ):
-        self.home_path = self.resolve_home_path(environ)
+        self.path = self.resolve_home_path(environ)
 
     def resolve_home_path(self, environ):
         home_path = '~/.did'
@@ -17,3 +17,6 @@ class Home(object):
             home_path = environ[Home.ENVIRONMENT_KEY]
 
         return home_path
+
+    def ensure_exists(self):
+        os.makedirs(self.path)
